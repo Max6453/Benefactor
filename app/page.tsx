@@ -248,7 +248,7 @@ export default function Example() {
     </div>
 
     <div className="relative object-cover">
-      <h3 className='max-sm:text-4xl text-5xl py-24 relative pb-5 font-bold'>Upcoming Events</h3>
+      <h3 className='text-4xl py-24 relative pb-5 font-bold text-pretty px-6'>Upcoming Events</h3>
        <Carousel className="max-md:left-0 relative rounded-2xl">
       <CarouselContent>
      <CarouselItem className="cursor-grab active:cursor-grabbing">
@@ -403,12 +403,10 @@ export default function Example() {
       </div>
     </fieldset>
   </form>
-          <span><a href="/Application">Dev</a></span>
-</footer>
-      <aside className="absolute flex items-baseline right-145">
+        <aside className="max-sm:relative absolute sm:top-990 bottom-1 flex items-baseline text-center max-sm:right-5 text-lg right-132">
         <p className="text-white">Copyright © {new Date().getFullYear()} - All right reserved by Benefactor group</p>
-        <span><a href="/Application">Dev</a></span>
       </aside>
+</footer>
 </div>
   )
 }
