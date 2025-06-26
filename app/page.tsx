@@ -1,9 +1,12 @@
 'use client'
 
+import { AnimatePresence, motion } from "framer-motion"
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon, Bars2Icon } from '@heroicons/react/24/outline'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
+import SplitText from "@/components/ui/SplitText";
+import CountUp from '@/components/ui/CountUp'
 
 const navigation = [
   { name: 'Formula 1', href: '/acount' },
@@ -11,6 +14,10 @@ const navigation = [
   { name: 'GTWC', href: '#' },
   { name: 'Carrers', href: '#' },
 ]
+
+const handleAnimationComplete = () => {
+  console.log('All letters have animated!');
+};
 
 const posts = [
   {
@@ -91,13 +98,12 @@ export default function Example() {
 
   return (
     <div className="bg-white">
-                    <img
-      src="/assets/Hypercar/Spa-Eau-Rouge.jpg"
-      className='absolute h-full w-full object-cover max-sm:hidden md:block'/>
+    <img src="/assets/Hypercar/Spa-Eau-Rouge.jpg"
+      className='absolute w-full h-full object-cover max-sm:hidden md:block'/>
       <img src="/assets/hypercar/Le-Mans-Straight-mobile.jpg"
       className='max-sm:block md:hidden w-full object-cover absolute h-full'/>
-      <header className="relative inset-x-0 top-0 z-50">
-        <nav aria-label="Global" className="flex switchNav items-center justify-between p-6 lg:px-8 border-b border-black">
+      <header className="relative inset-x-0 z-50 h-screen">
+        <nav aria-label="Global" className="flex w-full items-center justify-between p-6 lg:px-8 border-black">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
@@ -112,7 +118,7 @@ export default function Example() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-blue-600 hover:text-white duration-300"
             >
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="size-6" />
@@ -131,9 +137,18 @@ export default function Example() {
             </a>
           </div>
         </nav>
+      <AnimatePresence>
+        {mobileMenuOpen && (
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
           <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <motion.div
+              initial={{ translateX: '-60%', opacity: 0 }}
+              animate={{ translateX: 0, opacity: 1 }}
+              exit={{ translateX: '-100%', opacity: 1 }}
+              transition={{ type:"keyframes", stiffness: 300, damping: 30, duration: 0.5 }}
+              className="fixed inset-y-1 right-0 z-50 w-full overflow-y-auto opacity-10 text-center text-white px-6 py-6 sm:max-w-full sm:ring-1 sm:ring-gray-900/10"
+            >
+          <DialogPanel className="fixed inset-y-0 left-0 z-50 w-70 overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
@@ -146,7 +161,7 @@ export default function Example() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                className="-m-2.5 rounded-md p-2.5 text-red-500"
               >
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="size-6" />
@@ -175,17 +190,20 @@ export default function Example() {
                 </div>
               </div>
             </div>
-          </DialogPanel>
+            </DialogPanel>
+          </motion.div>
         </Dialog>
+              )}
+      </AnimatePresence>
       </header>
 
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="absolute z-40 max-sm:bottom-20 max-sm:left-0 sm:bottom-10 left-105 isolate px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           </div>
-          <div className="aboslute lg:left-100 max-sm:left-0 top-50 z-10">
+          <div className="lg:left-100 max-sm:left-0 z-10">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-center text-blue-500 sm:text-7xl">
-              Benefactor Racing
+              benefactor Racing
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-center text-white sm:text-xl/8">
             Official website of Benefactor racing team
@@ -229,24 +247,26 @@ export default function Example() {
       </div>
     </div>
 
-    <div className="grid grid-cols-1 grid-rows-1 ">
+    <div className="relative object-cover">
       <h3 className='max-sm:text-4xl text-5xl py-24 relative pb-5 font-bold'>Upcoming Events</h3>
-       <Carousel className="max-md:left-0 max-md:w-90 rounded-2xl">
+       <Carousel className="max-md:left-0 relative rounded-2xl">
       <CarouselContent>
-     <CarouselItem className="left-36 cursor-grab active:cursor-grabbing">
-      <img src="/assets/Hypercar/Le-Mans-straight-mobile.jpg" className='max-sm:w-full max-sm:h-full max-sm:block max-sm:object-cover sm:hidden'/>
-      <img src="/assets/Hypercar/Le-Mans-side.jpg" className='w-full h-full max-sm:hidden sm:block'/>
+     <CarouselItem className="cursor-grab active:cursor-grabbing">
+      <img src="/assets/Hypercar/Le-Mans-straight-mobile.jpg" className="max-sm:block sm:hidden object-cover max-sm:size-160"/>
+      <img src="/assets/Hypercar/Le-Mans-side.jpg" className='max-sm:hidden sm:block'/>
       <div className="bg-gray-500 opacity-80"></div>
      </CarouselItem>
-     <CarouselItem className="text-center left-36 cursor-grab active:cursor-grabbing">
-      <img src="assets/Hypercar/Spa-kemmel-chicane.jpg" className="w-full h-full object-cover"></img>
+     <CarouselItem className="text-center cursor-grab active:cursor-grabbing">
+      <img src="assets/Hypercar/Spa-kemmel-chicane.jpg" className="max-sm:block md:hidden max-sm:size-160 object-cover"/>
+      <img src="assets/Hypercar/Le-Mans-Dunlop.jpg" className="max-sm:hidden md:block"/>
      </CarouselItem>
      <CarouselItem className="text-center cursor-grab active:cursor-grabbing">
-      <img src="/assets/Formula1/Austria-T10.jpg" className='h-160'></img>
+      <img src="/assets/Formula1/Austria-T10.jpg" className='max-sm:hidden md:block'/>
+      <img src="assets/Hypercar/Le-Mans-chicane.jpg" className="max-sm:block md:hidden max-sm:size-160 object-cover"/>
      </CarouselItem>
      </CarouselContent>
-      <CarouselPrevious className="left-0 hidden"/>
-      <CarouselNext className="right-0 hidden" />
+      <CarouselPrevious className="left-0 max-sm:hidden"/>
+      <CarouselNext className="right-0 max-sm:hidden" />
     </Carousel>
   </div>
 
@@ -266,7 +286,6 @@ export default function Example() {
           <h2 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">Become a member</h2>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-300 sm:text-xl/8">
             We appreciate every support you giving us. Thats why we decided to make a "partnership" with you.
-
           </p>
         </div>
         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
@@ -292,8 +311,8 @@ export default function Example() {
 
 <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2 className="text-center text-lg/8 font-semibold text-gray-900">
-          Trusted by the world’s most innovative teams
+        <h2 className="text-center text-2xl font-semibold text-gray-900">
+          Benefactor Racing Partners
         </h2>
         <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
           <img
@@ -312,7 +331,7 @@ export default function Example() {
           />
           <img
             alt="Tuple"
-            src="/assets/sponsors/fanatec.jpg"
+            src="/assets/sponsors/Fanatec.png"
             width={158}
             height={48}
             className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
@@ -333,7 +352,7 @@ export default function Example() {
           />
             <img
             alt="Statamic"
-            src="/assets/sponsors/Mobil1.jpg"
+            src="/assets/sponsors/Mobil1.png"
             width={158}
             height={48}
             className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"

@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Benefactor",
   description: "Official website of Benfactor racing team",
+  manifest: "manifest.json"
 };
 export const viewport: Viewport = {
   width: 'device-width',
