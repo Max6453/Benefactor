@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -16,6 +17,14 @@ export const metadata: Metadata = {
   title: "Benefactor",
   description: "Official website of Benfactor racing team",
 };
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Also supported but less commonly used
+  // interactiveWidget: 'resizes-visual',
+}
 
 export default function RootLayout({
   children,
