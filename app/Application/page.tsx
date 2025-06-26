@@ -5,24 +5,63 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from "framer-motion"
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
+import { Herr_Von_Muellerhoff } from 'next/font/google'
 
 const navigation = [
   { name: 'Latest', href: '/app', current: false },
   { name: 'Archive', href: '/Archive', current: false },
-  { name: 'Contact', href: '/Contact', current: false },
-  { name: 'Portfolio', href: '/', current: true },
+  { name: 'WEC/IMSA', href: '/Contact', current: false },
+  { name: 'Formula 1', href: '/', current: true },
+  { name: 'GTWC', href: "", current: false },
 ] 
+
+
+window.addEventListener("load", function (): void {
+  const loader: HTMLElement | null = document.getElementById('loader');
+  const content: HTMLElement | null = document.getElementById('content');
+
+  if (!localStorage.getItem('loaderShown')) {
+    if (loader) {
+      loader.classList.add('visible');
+
+      setTimeout((): void => {
+        loader.classList.remove('visible');
+        loader.classList.add('hidden');
+
+        setTimeout((): void => {
+          if (loader) {
+            loader.style.display = 'none';
+          }
+          if (content) {
+            content.style.display = 'block';
+          }
+          localStorage.setItem('loaderShown', 'true');
+        }, 1500);
+      }, 1000);
+    }
+  } else {
+    if (loader) {
+      loader.style.display = 'none';
+    }
+    if (content) {
+      content.style.display = 'block';
+    }
+  }
+});
 
 export default function MobileApp() {
         const [mobileMenuOpen, setMobileMenuOpen] = useState(false) 
-          const [loading, setLoading] = useState(true);
+        const [loading, setLoading] = useState(true);
 
     return(
         <div className='bg-neutral-950'>
+          <div className='loader' id='loader'>
+          <img src="favicon.ico" className=" h-16 rounded-lg"/>
+          </div>
             <header className="relative inset-x-0 top-0 z-50">
                      <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8 h-10 bg-gray-200 shadow-2xl shadow-white">
-                      <div className='text-3xl text-neutral-950 font-edu-vic-wa-nt-beginner top-0 absolute left-1/3'>
-                        <h1 className='font-bold font-raleway'>MHBlog</h1>
+                      <div className='text-2xl text-neutral-950 font-edu-vic-wa-nt-beginner top-0 absolute left-18 pt-1'>
+                        <h1 className='font-bold font-raleway'>benefactor Racing</h1>
                         <h3 className='text-3xl max-sm:text-2xl max-sm:w-60 hidden'>Latest news and intrigues across many topics</h3>
                       </div>
                       <img src='/mobileIcon-navbar.png'
@@ -42,17 +81,17 @@ export default function MobileApp() {
                     </nav>
                    <AnimatePresence>
                     {mobileMenuOpen && (
-                    <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="block static">
-                    <div className="fixed inset-0 z-50 bg-black/20" />
-                    <motion.div
-                      initial={{ x: '0', opacity: 0 }}
-                      animate={{ x: 1, opacity: 1 }}
-                      exit={{ x: '0', opacity: 0 }}
-                      transition={{ type:"spring", stiffness: 300, damping: 30, duration: 0.6 }}
-                      className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto opacity-10 text-center text-white bg-black/50 px-6 py-6 sm:max-w-full sm:ring-1 sm:ring-gray-900/10"
-                    >
+                    <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+          <div className="fixed inset-0 z-50" />
+            <motion.div
+              initial={{ translateX: '-60%', opacity: 0 }}
+              animate={{ translateX: 0, opacity: 1 }}
+              exit={{ translateX: '-100%', opacity: 1 }}
+              transition={{ type:"keyframes", stiffness: 300, damping: 30, duration: 0.5 }}
+              className="fixed inset-y-1 right-0 z-50 w-full overflow-y-auto opacity-10 text-center text-blue-500 bg-white px-6 py-6 sm:max-w-full sm:ring-1 sm:ring-gray-900/10"
+            >
                 <DialogPanel>
-                  <div className="flex items-center justify-between">
+                  <div className="flex z-50 items-center justify-between">
                     <a href="#" className="-m-1.5 p-1.5">
                       <span className="sr-only">Your Company</span>
                       <img
@@ -64,29 +103,31 @@ export default function MobileApp() {
                     <button
                       type="button"
                       onClick={() => setMobileMenuOpen(false)}
-                      className=" rounded-md pr-4 pb-12 text-white hover:text-neutral-950 transition-all duration-300"
+                      className=" rounded-md pr-4 pb-12 text-red-500 hover:text-neutral-950 transition-all duration-300"
                     >
                       <span className="sr-only">Close menu</span>
                       <XMarkIcon aria-hidden="true" className="size-10 hover:rotate-180 duration-300" />
                     </button>
                   </div>
-                  <div className="mt-6 flow-root">
-                    <div className="-my-6 divide-y divide-gray-500/10">
-                      <div className="space-y-2 py-6">
+                  <div className=" flow-root">
+                    <div className="divide-gray-500/10">
+                      <div className="">
                         {navigation.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}
-                            className="-mx-3 block rounded-lg px-3 py-2 font-semibold text-white opacity-90 text-6xl m-8 hover:text-neutral-700 transition-all duration-250"
+                            className=" block rounded-lg text-start font-semibold text-blue-500 mt-10 opacity-90 text-4xl hover:text-neutral-700 transition-all duration-250"
                           >
                             {item.name}
                           </a>
                         ))}
                       </div>
                     </div>
+                    <div className='absolute bottom-10 text-start'>
                     <span>MHBlog</span>
                     <br/>
                     <span className='opacity-50'>App version: 1.5.0</span><br/>
+                    </div>
                   </div>
                   </DialogPanel>
                 </motion.div>
@@ -100,7 +141,7 @@ export default function MobileApp() {
        className='font-Exo-2 text-xl text-center pt-2 top-150 text-black z-10 h-11 bg-gray-200 absolute w-full'>Pics of the week</h4>
       <CarouselContent>
      <CarouselItem className="left-36 cursor-grab active:cursor-grabbing">
-      <img src="/assets/grello-mobile.jpg" className='w-full h-full'></img>
+      <img src="/assets/Hypercar/Le-Mans-Chicane.jpg" className='w-full h-full object-cover'></img>
       <div className="bg-gray-500 opacity-80"></div>
      </CarouselItem>
      <CarouselItem className="text-center left-36 cursor-grab active:cursor-grabbing">

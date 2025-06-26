@@ -403,9 +403,11 @@ export default function Example() {
       </div>
     </fieldset>
   </form>
+          <span><a href="/Application">Dev</a></span>
 </footer>
       <aside className="absolute flex items-baseline right-145">
         <p className="text-white">Copyright © {new Date().getFullYear()} - All right reserved by Benefactor group</p>
+        <span><a href="/Application">Dev</a></span>
       </aside>
 </div>
   )
