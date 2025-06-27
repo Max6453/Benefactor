@@ -1,7 +1,7 @@
 {
   "name": "McLaren Racing",
   "short_name": "McLaren",
-  "start_url": "/Application",
+  "start_url": "/Mobile",
   "icons": [
     {
       "src": "/android-chrome-96x96.png",
