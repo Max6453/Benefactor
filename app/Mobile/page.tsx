@@ -5,7 +5,6 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from "framer-motion"
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
-import { Herr_Von_Muellerhoff } from 'next/font/google'
 
 const navigation = [
   { name: 'Latest', href: '/app', current: false },
@@ -16,51 +15,52 @@ const navigation = [
 ] 
 
 export default function MobileApp() {
-        const [mobileMenuOpen, setMobileMenuOpen] = useState(false) 
-        const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+
   useEffect(() => {
-    const handleLoad = (): void => {
-      const loader = document.getElementById('loader');
-      const content = document.getElementById('content');
-
-      if (!localStorage.getItem('loaderShown')) {
-        if (loader) {
-          loader.classList.add('visible');
-
-          setTimeout((): void => {
-            loader.classList.remove('visible');
-            loader.classList.add('hidden');
-
-            setTimeout((): void => {
-              if (loader) {
-                loader.style.display = 'none';
-              }
-              if (content) {
-                content.style.display = 'block';
-              }
-              localStorage.setItem('loaderShown', 'true');
-            }, 1500);
-          }, 1000);
-        }
-      } else {
-        if (loader) {
-          loader.style.display = 'none';
-        }
-        if (content) {
-          content.style.display = 'block';
-        }
-      }
-    };
-
-    window.addEventListener('load', handleLoad);
-    return () => window.removeEventListener('load', handleLoad);
+    const timer = setTimeout(() => setShowSplash(false), 1500); // 1.5s splash
+    return () => clearTimeout(timer);
   }, []);
 
     return(
         <div className='bg-neutral-950'>
-          <div className='loader' id='loader'>
-          <img src="favicon.ico" className=" h-16 rounded-lg"/>
-          </div>
+<AnimatePresence>
+        {showSplash && (
+          <motion.div
+            key="splash"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-neutral-950"
+            initial={{ opacity: 1,}}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+          >
+            <motion.img
+              src="/favicon.ico"
+              alt="Benefactor Logo"
+              className="w-32 h-32"
+              initial={{ scale: 0.7, opacity: 0 }}
+              animate={{ scale: 1.1, opacity: 1 }}
+              exit={{ scale: 0.7, opacity: 0 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+              style={{ filter: 'drop-shadow(0 0 20px #ffffff)' }}
+            />
+            <motion.h1
+              className="text-white absolute bottom-20 text-3xl font-orbitron text-center"
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -40, opacity: 0 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+            >
+              benefactor Racing
+            </motion.h1>
+          </motion.div>
+        )}
+      </AnimatePresence>
+        <div className={`bg-neutral-950 ${showSplash ? 'opacity-0 pointer-events-none' : 'opacity-100 transition-opacity duration-700'}`}>
+          {/* ...rest of your component... */}
+        </div>
+
             <header className="relative inset-x-0 top-0 z-50">
                      <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8 h-10 bg-gray-200 shadow-2xl shadow-white">
                       <div className='text-2xl text-neutral-950 font-edu-vic-wa-nt-beginner top-0 absolute left-18 pt-1'>
@@ -95,6 +95,7 @@ export default function MobileApp() {
             >
                 <DialogPanel>
                   <div className="flex z-50 items-center justify-between">
+                    <img src="/favicon.ico" className='w-15 pb-10'/>
                     <a href="#" className="-m-1.5 p-1.5">
                       <span className="sr-only">Your Company</span>
                       <img
@@ -139,29 +140,29 @@ export default function MobileApp() {
             </AnimatePresence>
             </header>
             <div className="grid grid-cols-1 grid-rows-1 ">
-       <Carousel className="max-md:left-0 max-md:w-90 rounded-2xl">
-       <h4
-       className='font-Exo-2 text-xl text-center pt-2 top-150 text-black z-10 h-11 bg-gray-200 absolute w-full'>Pics of the week</h4>
-      <CarouselContent>
-     <CarouselItem className="left-36 cursor-grab active:cursor-grabbing">
-      <img src="/assets/Hypercar/Le-Mans-Chicane.jpg" className='w-full h-full object-cover'></img>
-      <div className="bg-gray-500 opacity-80"></div>
-     </CarouselItem>
-     <CarouselItem className="text-center left-36 cursor-grab active:cursor-grabbing">
-      <img src="assets/24-Nurburgring-mobile.jpg" className="w-full h-160"></img>
-     </CarouselItem>
-     <CarouselItem className="text-center cursor-grab active:cursor-grabbing">
-      <img src="/assets/MBW-le-mans.jpg" className='h-160'></img>
-     </CarouselItem>
-     </CarouselContent>
-      <CarouselPrevious className="left-0 hidden"/>
-      <CarouselNext className="right-0 hidden" />
-    </Carousel>
-    
+                  <Carousel className="max-md:left-0 max-md:w-90 rounded-2xl">
+                  <h4
+                  className='font-Exo-2 text-xl text-center pt-2 top-150 text-black z-10 h-11 bg-gray-200 absolute w-full'>Pics of the week</h4>
+                  <CarouselContent>
+                <CarouselItem className="left-36 cursor-grab active:cursor-grabbing">
+                  <img src="/assets/Formula1/Austria-over-the-apex.jpg" className='object-cover h-full w-full'></img>
+                  <div className="bg-gray-500 opacity-80"></div>
+                </CarouselItem>
+                <CarouselItem className="text-center left-36 cursor-grab active:cursor-grabbing">
+                  <img src="assets/Formula1/Austria-T4.jpg" className="w-full h-full object-cover"></img>
+                </CarouselItem>
+                <CarouselItem className="text-center cursor-grab active:cursor-grabbing">
+                  <img src="/assets/Formula1/Austria-T2.jpg" className='w-full h-160 object-cover'></img>
+                </CarouselItem>
+                </CarouselContent>
+                  <CarouselPrevious className="left-0 hidden"/>
+                  <CarouselNext className="right-0 hidden" />
+                </Carousel>
                 <div className="relative w-full h-100">
-                    <img src="/assets/24-Nurburgring-mobile.jpg"/>
+                    <img src="/assets/Formula1/Austria-T4.jpg"
+                    className='object-cover w-full h-full'/>
                     <div className='text-start bg-gray-200 top-99 h-20 w-full z-10 absolute'>
-                    <h3 className='font-Exo-2 text-xl text-center text-black'>24 Hours of Nurburgring was wild</h3>
+                    <h3 className='font-Exo-2 text-xl text-center text-black'>Successfull executed race in Austria</h3>
                     <a href='/'>
                         <button className='relative top-3 left-1/3 w-25 h-10 rounded-full text-black bg-white border shadow-4xl border-white hover:bg-white hover:border-white hover:text-white transition duration-300'>
                         See more</button>
@@ -169,27 +170,12 @@ export default function MobileApp() {
                     </div>
                 </div>
                 <div className="relative w-full h-100">
-                    <img src="/assets/setup-app.jpg"/>
-                    <div className='text-start bg-gray-200 top-99 h-20 w-full z-10 absolute'>
+                    <img src="/assets/Hypercar/le-Mans-Chicane.jpg"
+                    className='object-cover w-full h-160'/>
+                    <div className='text-start bg-gray-200 top-140 h-20 w-full z-10 absolute'>
                     <h3 className='font-Exo-2 text-xl text-center text-black'>Newest review of product just released</h3>
                     <a href='/'>
                         <button className='relative top-3 left-1/3 w-25 h-10 rounded-full text-black bg-white border shadow-4xl border-white hover:bg-white hover:border-white hover:text-white transition duration-300'>
-                        See more</button>
-                    </a>
-                    </div>
-                </div>
-                <div className='relative w-full h-100 top-19'>
-                    <img src="/assets/canada-duel.jpg"/>
-                    <div className='text-start bg-gray-200 h-20 w-full z-10 absolute'>
-                    <h3 className='font-Exo-2 text-xl text-black pt-12 text-center'>Cool pic from Canada:)</h3>
-                    </div>
-                </div>
-                <div className='relative w-full'>
-                    <img src="/assets/Le-Mans.jpg"/>
-                     <div className='text-start bg-gray-200 h-20 w-full z-10 absolute'>
-                    <h3 className='font-Exo-2 text-xl text-black'>Have you read the latest WEC debriefing?</h3>
-                    <a href='/'>
-                        <button className='relative bottom-5 left-1/3 w-25 h-10 rounded-full text-black bg-white border shadow-4xl border-white hover:bg-white hover:border-white hover:text-white transition duration-300'>
                         See more</button>
                     </a>
                     </div>

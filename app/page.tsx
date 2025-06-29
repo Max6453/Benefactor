@@ -22,10 +22,10 @@ const handleAnimationComplete = () => {
 const posts = [
   {
     id: 1,
-    title: 'Austrian Grand Prix Preview',
+    title: 'Austrian Grand Prix Report',
     href: '#',
     description:
-      'Everything you need to know about 2025 Austrian Grand Prix',
+      'Hear from drivers and team principal about everything that happened in 2025 Austrian Grand Prix',
     date: '26/06/2025',
     datetime: '2025-06-26',
     category: { title: 'Prieview', href: '/' },
@@ -120,7 +120,7 @@ export default function Example() {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white font-raleway">
     <img src="/assets/Hypercar/Spa-Eau-Rouge.jpg"
       className='absolute w-full h-full object-cover max-sm:hidden md:block'/>
       <img src="/assets/hypercar/Le-Mans-Straight-mobile.jpg"
@@ -438,6 +438,7 @@ export default function Example() {
   </form>
         <aside className="max-sm:relative absolute sm:top-990 bottom-1 flex items-baseline text-center max-sm:right-5 text-lg right-132">
         <p className="text-white">Copyright © {new Date().getFullYear()} - All right reserved by Benefactor group</p>
+        <span><a href="/Mobile">DevLink</a></span>
       </aside>
 </footer>
 </div>
