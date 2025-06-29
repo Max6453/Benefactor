@@ -1,10 +1,10 @@
 {
-  "name": "McLaren Racing",
-  "short_name": "McLaren",
-  "start_url": "/Application",
+  "name": "Benefactor Racing",
+  "short_name": "Benefactor",
+  "start_url": "/Mobile",
   "icons": [
     {
-      "src": "/android-chrome-96x96.png",
+      "src": "/mobile-icon-black.png",
       "sizes": "96x96",
       "type": "image/png"
     }

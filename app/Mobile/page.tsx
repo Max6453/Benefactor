@@ -15,8 +15,8 @@ const navigation = [
   { name: 'GTWC', href: "", current: false },
 ] 
 
-
-window.addEventListener("load", function (): void {
+{/*
+  window.addEventListener("load", function (): void {
   const loader: HTMLElement | null = document.getElementById('loader');
   const content: HTMLElement | null = document.getElementById('content');
 
@@ -48,7 +48,7 @@ window.addEventListener("load", function (): void {
     }
   }
 });
-
+*/}
 export default function MobileApp() {
         const [mobileMenuOpen, setMobileMenuOpen] = useState(false) 
         const [loading, setLoading] = useState(true);
@@ -154,6 +154,7 @@ export default function MobileApp() {
       <CarouselPrevious className="left-0 hidden"/>
       <CarouselNext className="right-0 hidden" />
     </Carousel>
+    
                 <div className="relative w-full h-100">
                     <img src="/assets/24-Nurburgring-mobile.jpg"/>
                     <div className='text-start bg-gray-200 top-99 h-20 w-full z-10 absolute'>

@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from "framer-motion"
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon, Bars2Icon } from '@heroicons/react/24/outline'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
@@ -82,9 +82,9 @@ const posts = [
 ]
 
 const links = [
-  { name: 'How does this work', href: '#' },
-  { name: 'Benefits', href: '#' },
-  { name: 'Become member', href: '#' },
+  { name: 'How does this work', href: '/Membership/' },
+  { name: 'Benefits', href: '/Membership/#Benefits' },
+  { name: 'Become member', href: '/Member/Form' },
 ]
 const stats = [
   { name: 'Official memebers', value: '120 000' },
@@ -95,6 +95,29 @@ const stats = [
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+  const [showInstall, setShowInstall] = useState(false)
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
+      setShowInstall(true)
+    }
+    window.addEventListener('beforeinstallprompt', handler)
+    return () => window.removeEventListener('beforeinstallprompt', handler)
+  }, [])
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt()
+      const { outcome } = await deferredPrompt.userChoice
+      if (outcome === 'accepted') {
+        setShowInstall(false)
+      }
+      setDeferredPrompt(null)
+    }
+  }
 
   return (
     <div className="bg-white">
@@ -253,16 +276,27 @@ export default function Example() {
       <CarouselContent>
      <CarouselItem className="cursor-grab active:cursor-grabbing">
       <img src="/assets/Hypercar/Le-Mans-straight-mobile.jpg" className="max-sm:block sm:hidden object-cover max-sm:size-160"/>
-      <img src="/assets/Hypercar/Le-Mans-side.jpg" className='max-sm:hidden sm:block'/>
-      <div className="bg-gray-500 opacity-80"></div>
+      <img src="/assets/Formula1/Austria-T2.jpg" className='max-sm:hidden sm:block'/>
+      <div className="bg-white opacity-80 text-blue-500 rounded-full text-3xl absolute z-50 bottom-5 max-sm:w-90 sm:w-110 text-center sm:text-start sm:pl-5 sm:left-10">
+        <h3>Austrian Grand Prix</h3>
+        <h5>27/06 - 29/06</h5>
+      </div>
      </CarouselItem>
      <CarouselItem className="text-center cursor-grab active:cursor-grabbing">
       <img src="assets/Hypercar/Spa-kemmel-chicane.jpg" className="max-sm:block md:hidden max-sm:size-160 object-cover"/>
       <img src="assets/Hypercar/Le-Mans-Dunlop.jpg" className="max-sm:hidden md:block"/>
+      <div className="bg-white opacity-80 text-blue-500 rounded-full text-3xl absolute z-50 bottom-5 max-sm:w-90 sm:w-110 text-center sm:text-start sm:pl-5 sm:left-385">
+        <h3>British Grand Prix</h3>
+        <h5>27/06 - 29/06</h5>
+      </div>
      </CarouselItem>
      <CarouselItem className="text-center cursor-grab active:cursor-grabbing">
-      <img src="/assets/Formula1/Austria-T10.jpg" className='max-sm:hidden md:block'/>
+      <img src="/assets/Hypercar/Brasil-2nd-Sector.jpg" className='max-sm:hidden md:block'/>
       <img src="assets/Hypercar/Le-Mans-chicane.jpg" className="max-sm:block md:hidden max-sm:size-160 object-cover"/>
+      <div className="bg-white opacity-80 text-blue-500 rounded-full text-3xl absolute z-50 bottom-5 max-sm:w-90 sm:w-110 text-center sm:text-start sm:pl-5 sm:left-760">
+        <h3>6 Hours of Sao Paulo</h3>
+        <h5>11/07 - 13/07</h5>
+      </div>
      </CarouselItem>
      </CarouselContent>
       <CarouselPrevious className="left-0 max-sm:hidden"/>
@@ -274,7 +308,7 @@ export default function Example() {
   <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
       <img
         alt=""
-        src="/assets/Formula1/Monaco-chicane.jpg"
+        src="/assets/Hypercar/Spa-Eau-Rouge.jpg"
         className="absolute inset-0 -z-10 size-full object-cover object-right md:object-center max-sm:hidden md:block"
       />
       <img
@@ -283,7 +317,7 @@ export default function Example() {
       className="absolute inset-0 -z-10 size-full object-cover md:object-center max-sm:block md:hidden"/>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">Become a member</h2>
+          <h2 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">Become a <span className="text-blue-500">member</span></h2>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-300 sm:text-xl/8">
             We appreciate every support you giving us. Thats why we decided to make a "partnership" with you.
           </p>
@@ -300,14 +334,13 @@ export default function Example() {
             {stats.map((stat) => (
               <div key={stat.name} className="flex flex-col-reverse gap-1">
                 <dt className="text-base/7 text-gray-300">{stat.name}</dt>
-                <dd className="text-4xl font-semibold tracking-tight text-white">{stat.value}</dd>
+                <dd className="text-4xl font-semibold tracking-tight text-cyan-400">{stat.value}</dd>
               </div>
             ))}
           </dl>
         </div>
       </div>
     </div>
-
 
 <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
