@@ -15,43 +15,46 @@ const navigation = [
   { name: 'GTWC', href: "", current: false },
 ] 
 
-
-  window.addEventListener("load", function (): void {
-  const loader: HTMLElement | null = document.getElementById('loader');
-  const content: HTMLElement | null = document.getElementById('content');
-
-  if (!localStorage.getItem('loaderShown')) {
-    if (loader) {
-      loader.classList.add('visible');
-
-      setTimeout((): void => {
-        loader.classList.remove('visible');
-        loader.classList.add('hidden');
-
-        setTimeout((): void => {
-          if (loader) {
-            loader.style.display = 'none';
-          }
-          if (content) {
-            content.style.display = 'block';
-          }
-          localStorage.setItem('loaderShown', 'true');
-        }, 1500);
-      }, 1000);
-    }
-  } else {
-    if (loader) {
-      loader.style.display = 'none';
-    }
-    if (content) {
-      content.style.display = 'block';
-    }
-  }
-});
-
 export default function MobileApp() {
         const [mobileMenuOpen, setMobileMenuOpen] = useState(false) 
         const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const handleLoad = (): void => {
+      const loader = document.getElementById('loader');
+      const content = document.getElementById('content');
+
+      if (!localStorage.getItem('loaderShown')) {
+        if (loader) {
+          loader.classList.add('visible');
+
+          setTimeout((): void => {
+            loader.classList.remove('visible');
+            loader.classList.add('hidden');
+
+            setTimeout((): void => {
+              if (loader) {
+                loader.style.display = 'none';
+              }
+              if (content) {
+                content.style.display = 'block';
+              }
+              localStorage.setItem('loaderShown', 'true');
+            }, 1500);
+          }, 1000);
+        }
+      } else {
+        if (loader) {
+          loader.style.display = 'none';
+        }
+        if (content) {
+          content.style.display = 'block';
+        }
+      }
+    };
+
+    window.addEventListener('load', handleLoad);
+    return () => window.removeEventListener('load', handleLoad);
+  }, []);
 
     return(
         <div className='bg-neutral-950'>

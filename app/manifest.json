@@ -4,7 +4,7 @@
   "start_url": "/Mobile",
   "icons": [
     {
-      "src": "/mobile-icon-black.png",
+      "src": "/favicon.ico",
       "sizes": "96x96",
       "type": "image/png"
     }
