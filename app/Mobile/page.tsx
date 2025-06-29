@@ -15,7 +15,7 @@ const navigation = [
   { name: 'GTWC', href: "", current: false },
 ] 
 
-{/*
+
   window.addEventListener("load", function (): void {
   const loader: HTMLElement | null = document.getElementById('loader');
   const content: HTMLElement | null = document.getElementById('content');
@@ -48,7 +48,7 @@ const navigation = [
     }
   }
 });
-*/}
+
 export default function MobileApp() {
         const [mobileMenuOpen, setMobileMenuOpen] = useState(false) 
         const [loading, setLoading] = useState(true);
