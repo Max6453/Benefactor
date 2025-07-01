@@ -82,9 +82,7 @@ const posts = [
 ]
 
 const links = [
-  { name: 'How does this work', href: '/Membership/' },
-  { name: 'Benefits', href: '/Membership/#Benefits' },
-  { name: 'Become member', href: '/Member/Form' },
+  { name: 'Become member', href: '/Membership' },
 ]
 const stats = [
   { name: 'Official memebers', value: '120 000' },
@@ -350,52 +348,52 @@ export default function Example() {
         <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
           <img
             alt="Transistor"
-            src="/assets/sponsors/brembo.png"
+            src="/assets/Sponsors/brembo.png"
             width={158}
             height={48}
-            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 hover:shadow-2xl hover:scale-105 duration-300"
           />
           <img
             alt="Reform"
-            src="/assets/sponsors/Exxon.png"
+            src="/assets/Sponsors/Exxon.png"
             width={158}
             height={48}
-            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 hover:shadow-2xl hover:scale-105 duration-300"
           />
           <img
             alt="Tuple"
-            src="/assets/sponsors/Fanatec.png"
+            src="/assets/Sponsors/Fanatec.png"
             width={158}
             height={48}
-            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 hover:shadow-2xl hover:scale-105 duration-300"
           />
           <img
             alt="SavvyCal"
-            src="/assets/sponsors/GoPro.png"
+            src="/assets/Sponsors/GoPro.png"
             width={158}
             height={48}
-            className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
+            className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1 hover:shadow-2xl hover:scale-105 duration-300"
           />
           <img
             alt="Statamic"
-            src="/assets/sponsors/gulf.png"
+            src="/assets/Sponsors/gulf.png"
             width={158}
             height={48}
-            className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+            className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1 hover:shadow-2xl hover:scale-105 duration-300"
           />
             <img
             alt="Statamic"
-            src="/assets/sponsors/Mobil1.png"
+            src="/assets/Sponsors/Mobil1.png"
             width={158}
             height={48}
-            className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+            className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1 hover:shadow-2xl hover:scale-105 duration-300"
           />
             <img
             alt="Statamic"
-            src="/assets/sponsors/Shell.webp"
+            src="/assets/Sponsors/Shell.webp"
             width={158}
             height={48}
-            className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+            className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1 hover:shadow-2xl hover:scale-105 duration-300"
           />
         </div>
       </div>
@@ -438,7 +436,6 @@ export default function Example() {
   </form>
         <aside className="max-sm:relative absolute sm:top-990 bottom-1 flex items-baseline text-center max-sm:right-5 text-lg right-132">
         <p className="text-white">Copyright © {new Date().getFullYear()} - All right reserved by Benefactor group</p>
-        <span><a href="/Mobile">DevLink</a></span>
       </aside>
 </footer>
 </div>

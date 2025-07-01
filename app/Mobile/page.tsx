@@ -1,10 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { cn } from "@/lib/utils"
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from "framer-motion"
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
+import React from 'react';
 
 const navigation = [
   { name: 'Latest', href: '/app', current: false },
@@ -15,16 +15,12 @@ const navigation = [
 ] 
 
 export default function MobileApp() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 1500); // 1.5s splash
-    return () => clearTimeout(timer);
-  }, []);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [showSplash, setShowSplash] = useState(true);
 
     return(
-        <div className='bg-neutral-950'>
+        <div className='bg-neutral-950 font-raleway'>
+          {/* HIDE AFTER A RACE */}
 <AnimatePresence>
         {showSplash && (
           <motion.div
@@ -65,10 +61,7 @@ export default function MobileApp() {
                      <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8 h-10 bg-gray-200 shadow-2xl shadow-white">
                       <div className='text-2xl text-neutral-950 font-edu-vic-wa-nt-beginner top-0 absolute left-18 pt-1'>
                         <h1 className='font-bold font-raleway'>benefactor Racing</h1>
-                        <h3 className='text-3xl max-sm:text-2xl max-sm:w-60 hidden'>Latest news and intrigues across many topics</h3>
                       </div>
-                      <img src='/mobileIcon-navbar.png'
-                      className='h-30 w-auto hover:scale-110 right-175 transition-all duration-300 absolute sm:hidden md:hidden lg:hidden xl:block'/>
                       <div className="absolute right-5 pt-10 pr-5 max-md:pr-0 max-md:right-0 max-md:pt-25">
                         <button
                         id='openBtn'
@@ -85,7 +78,7 @@ export default function MobileApp() {
                    <AnimatePresence>
                     {mobileMenuOpen && (
                     <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
-          <div className="fixed inset-0 z-50" />
+          <div className="fixed inset-0 z-50 h-screen" />
             <motion.div
               initial={{ translateX: '-60%', opacity: 0 }}
               animate={{ translateX: 0, opacity: 1 }}
@@ -120,7 +113,7 @@ export default function MobileApp() {
                           <a
                             key={item.name}
                             href={item.href}
-                            className=" block rounded-lg text-start font-semibold text-blue-500 mt-10 opacity-90 text-4xl hover:text-neutral-700 transition-all duration-250"
+                            className=" block rounded-lg text-start font-semibold font-orbitron text-blue-500 mt-10 opacity-90 text-4xl hover:text-neutral-700 transition-all duration-250"
                           >
                             {item.name}
                           </a>
@@ -128,7 +121,7 @@ export default function MobileApp() {
                       </div>
                     </div>
                     <div className='absolute bottom-10 text-start'>
-                    <span>MHBlog</span>
+                    <span>Benefactor Racing</span>
                     <br/>
                     <span className='opacity-50'>App version: 1.5.0</span><br/>
                     </div>
@@ -145,19 +138,30 @@ export default function MobileApp() {
                   className='font-Exo-2 text-xl text-center pt-2 top-150 text-black z-10 h-11 bg-gray-200 absolute w-full'>Pics of the week</h4>
                   <CarouselContent>
                 <CarouselItem className="left-36 cursor-grab active:cursor-grabbing">
-                  <img src="/assets/Formula1/Austria-over-the-apex.jpg" className='object-cover h-full w-full'></img>
+                  <img src="/assets/Formula1/Testing-hungary-Chicane-mobile.jpg" className='object-cover h-full w-full'></img>
                   <div className="bg-gray-500 opacity-80"></div>
                 </CarouselItem>
                 <CarouselItem className="text-center left-36 cursor-grab active:cursor-grabbing">
                   <img src="assets/Formula1/Austria-T4.jpg" className="w-full h-full object-cover"></img>
                 </CarouselItem>
                 <CarouselItem className="text-center cursor-grab active:cursor-grabbing">
-                  <img src="/assets/Formula1/Austria-T2.jpg" className='w-full h-160 object-cover'></img>
+                  <img src="/assets/Formula1/testing-Hungary-T4-mobile.jpg" className='w-full h-160 object-cover'></img>
                 </CarouselItem>
                 </CarouselContent>
                   <CarouselPrevious className="left-0 hidden"/>
                   <CarouselNext className="right-0 hidden" />
                 </Carousel>
+                <div className="relative w-full h-100">
+                    <img src="/assets/Formula1/Testing-Hungary-Chicane-mobile.jpg"
+                    className='object-cover w-full h-full'/>
+                    <div className='text-start bg-gray-200 top-99 h-20 w-full z-10 absolute'>
+                    <h3 className='font-Exo-2 text-xl text-center text-black'>First testing done by Oliver in Hungary</h3>
+                    <a href='/Articles/Formula-1/Hungary/Oliver-Goethe-Testing-In-Hungary'>
+                        <button className='relative top-3 left-1/3 w-25 h-10 rounded-full text-black bg-white border shadow-4xl border-white hover:bg-white hover:border-white hover:text-white transition duration-300'>
+                        See more</button>
+                    </a>
+                    </div>
+                </div>
                 <div className="relative w-full h-100">
                     <img src="/assets/Formula1/Austria-T4.jpg"
                     className='object-cover w-full h-full'/>
@@ -169,18 +173,7 @@ export default function MobileApp() {
                     </a>
                     </div>
                 </div>
-                <div className="relative w-full h-100">
-                    <img src="/assets/Hypercar/le-Mans-Chicane.jpg"
-                    className='object-cover w-full h-160'/>
-                    <div className='text-start bg-gray-200 top-140 h-20 w-full z-10 absolute'>
-                    <h3 className='font-Exo-2 text-xl text-center text-black'>Newest review of product just released</h3>
-                    <a href='/'>
-                        <button className='relative top-3 left-1/3 w-25 h-10 rounded-full text-black bg-white border shadow-4xl border-white hover:bg-white hover:border-white hover:text-white transition duration-300'>
-                        See more</button>
-                    </a>
-                    </div>
-                </div>
             </div>
         </div>
     );
-}
+};
