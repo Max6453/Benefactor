@@ -9,7 +9,7 @@ import SplitText from "@/components/ui/SplitText";
 import CountUp from '@/components/ui/CountUp'
 
 const navigation = [
-  { name: 'Formula 1', href: '/acount' },
+  { name: 'Formula 1', href: '/Mobile' },
   { name: 'WEC & IMSA', href: '#' },
   { name: 'GTWC', href: '#' },
   { name: 'Carrers', href: '#' },
@@ -121,7 +121,7 @@ export default function Example() {
     <div className="bg-white font-raleway">
     <img src="/assets/Hypercar/Spa-Eau-Rouge.jpg"
       className='absolute w-full h-full object-cover max-sm:hidden md:block'/>
-      <img src="/assets/hypercar/Le-Mans-Straight-mobile.jpg"
+      <img src="/assets/Hypercar/Le-Mans-Straight-mobile.jpg"
       className='max-sm:block md:hidden w-full object-cover absolute h-full'/>
       <header className="relative inset-x-0 z-50 h-screen">
         <nav aria-label="Global" className="flex w-full items-center justify-between p-6 lg:px-8 border-black">

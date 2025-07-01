@@ -18,6 +18,11 @@ export default function MobileApp() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
       const [showSplash, setShowSplash] = useState(true);
 
+      useEffect(() => {
+  const timer = setTimeout(() => setShowSplash(false), 2000); // 2 seconds
+  return () => clearTimeout(timer);
+}, []);
+
     return(
         <div className='bg-neutral-950 font-raleway'>
           {/* HIDE AFTER A RACE */}
@@ -54,7 +59,6 @@ export default function MobileApp() {
         )}
       </AnimatePresence>
         <div className={`bg-neutral-950 ${showSplash ? 'opacity-0 pointer-events-none' : 'opacity-100 transition-opacity duration-700'}`}>
-          {/* ...rest of your component... */}
         </div>
 
             <header className="relative inset-x-0 top-0 z-50">
