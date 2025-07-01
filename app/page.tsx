@@ -220,9 +220,7 @@ export default function Example() {
 
       <div className="absolute z-40 max-sm:bottom-20 max-sm:left-0 sm:bottom-10 left-105 isolate px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-          </div>
-          <div className="lg:left-100 max-sm:left-0 z-10">
+          <div className="max-sm:left-0 z-10 relative">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-center text-blue-500 sm:text-7xl">
               benefactor Racing
             </h1>
