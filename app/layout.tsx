@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Viewport } from "next";
 import { Raleway, Orbitron } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -38,6 +39,7 @@ export default function RootLayout({
         className={`${raleway.variable} ${orbitron.variable} antialiased`}
       >
         {children}
+        <Analytics/>
       </body>
     </html>
   );
