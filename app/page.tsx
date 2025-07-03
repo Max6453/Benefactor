@@ -9,8 +9,8 @@ import SplitText from "@/components/ui/SplitText";
 import CountUp from '@/components/ui/CountUp'
 
 const navigation = [
-  { name: 'Formula 1', href: '/Mobile' },
-  { name: 'WEC & IMSA', href: '#' },
+  { name: 'Formula 1', href: '/Formula-1' },
+  { name: 'Endurance', href: '/Endurance' },
   { name: 'GTWC', href: '#' },
   { name: 'Carrers', href: '#' },
 ]
@@ -225,7 +225,7 @@ export default function Example() {
               benefactor Racing
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-center text-white sm:text-xl/8">
-            Official website of Benefactor racing team
+            Official Racing Hub of benefactor Group
             </p>
           </div>
         </div>
